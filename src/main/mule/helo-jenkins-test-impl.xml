@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="f598590b-b458-41ba-8cf9-8c141be14a0c" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="helo-jenkins-test-implFlow" doc:id="dd278e04-c186-4a6b-8414-8a8a5b3e1c48" >
+		<http:listener doc:name="Listener" doc:id="7b8ad364-994a-4be6-945d-fdc4fffca6cd" config-ref="HTTP_Listener_config" path="/hello"/>
+		<set-payload value='#[output application/json --- "Hello Splunk"]' doc:name="hello jenkins" doc:id="fb758dfa-3e10-4ccc-a542-0643cef44e0a" />
+		<logger level="INFO" doc:name="log payload" doc:id="812eaea1-8c6f-41a7-bd40-6e3ea24a8b84" message="#[payload]"/>
+	</flow>
+</mule>
